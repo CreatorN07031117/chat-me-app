@@ -76,10 +76,6 @@ export function Chat({ phone, credentials, userName }: ChatProps) {
 
           const incomingMessage = getIncomingTextMessage(notification)
 
-          await deleteNotification(credentials, notification.receiptId, controller.signal)
-
-          if (!isActive) return
-
           if (incomingMessage && isIncomingMessageForPhone(incomingMessage, phone)) {
             setMessages((currentMessages) => {
               if (currentMessages.some((message) => message.id === incomingMessage.idMessage)) {
@@ -92,6 +88,10 @@ export function Chat({ phone, credentials, userName }: ChatProps) {
               ]
             })
           }
+
+          await deleteNotification(credentials, notification.receiptId, controller.signal)
+
+          if (!isActive) return
 
           setReceiveError('')
         } catch (pollingError) {

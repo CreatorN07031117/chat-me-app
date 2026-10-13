@@ -180,6 +180,7 @@ export type GreenApiNotification = {
     idMessage?: string
     senderData?: {
       chatId?: string
+      sender?: string
       senderPhoneNumber?: number
     }
     messageData?: {
@@ -194,6 +195,7 @@ export type GreenApiNotification = {
 export type GreenApiIncomingTextMessage = {
   idMessage: string
   chatId: string
+  sender?: string
   senderPhoneNumber?: number
   text: string
 }
@@ -235,7 +237,8 @@ export async function receiveNotification(
     }
   }
 
-  if (!rawBody.trim()) return null
+  // GREEN-API can return JSON `null` with HTTP 200 when the queue is empty.
+  if (!rawBody.trim() || payload === null) return null
 
   if (!response.ok) {
     throw new GreenApiError(
@@ -295,9 +298,11 @@ export async function deleteNotification(
     )
   }
 
-  if (!isRecord(payload) || payload.result !== true) {
+  if (!isRecord(payload) || typeof payload.result !== 'boolean') {
     throw new GreenApiError('GREEN-API не подтвердил обработку уведомления.')
   }
+
+  return payload.result
 }
 
 export function getIncomingTextMessage(
@@ -319,6 +324,7 @@ export function getIncomingTextMessage(
   return {
     idMessage: body.idMessage,
     chatId: body.senderData.chatId,
+    sender: body.senderData.sender,
     senderPhoneNumber: body.senderData.senderPhoneNumber,
     text: textMessageData.textMessage,
   }
@@ -329,9 +335,14 @@ export function isIncomingMessageForPhone(
   phone: string,
 ) {
   const targetPhone = normalizePhoneNumber(phone)
+  const senderId = message.sender?.split('@')[0] ?? ''
   const senderPhone = message.senderPhoneNumber
     ? normalizePhoneNumber(message.senderPhoneNumber)
     : ''
 
-  return senderPhone === targetPhone || message.chatId === phoneToChatId(phone)
+  return (
+    senderPhone === targetPhone ||
+    senderId === targetPhone ||
+    message.chatId === phoneToChatId(phone)
+  )
 }
