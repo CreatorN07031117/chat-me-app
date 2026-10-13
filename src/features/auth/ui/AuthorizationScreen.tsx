@@ -35,12 +35,12 @@ function formatPhone(value: string) {
 }
 
 const instanceStateMessages: Record<GreenApiInstanceState, string> = {
-  notAuthorized: 'Инстанс не авторизован в Telegram.',
+  notAuthorized: 'Инстанс WhatsApp не авторизован.',
   authorized: '',
-  blocked: 'Инстанс заблокирован GREEN-API.',
-  suspended: 'На инстансе действуют временные ограничения.',
-  starting: 'Инстанс ещё запускается. Повторите попытку через несколько минут.',
-  pendingPassword: 'Для инстанса требуется пароль двухфакторной аутентификации.',
+  sleepMode: 'Телефон с WhatsApp находится в спящем режиме. Включите его и повторите попытку через несколько минут.',
+  starting: 'Инстанс WhatsApp ещё запускается. Повторите попытку через несколько минут.',
+  yellowCard: 'На инстансе WhatsApp действуют временные ограничения.',
+  suspended: 'Инстанс WhatsApp приостановлен.',
 }
 
 export function AuthorizationScreen({ isOpen, onClose, onChatStart }: AuthorizationScreenProps) {

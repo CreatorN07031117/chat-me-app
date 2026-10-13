@@ -1,4 +1,4 @@
-export const GREEN_API_URL = 'https://4100.api.green-api.com'
+export const GREEN_API_URL = 'https://7201.api.green-api.com'
 
 export type GreenApiCredentials = {
   idInstance: string
@@ -8,10 +8,10 @@ export type GreenApiCredentials = {
 export type GreenApiInstanceState =
   | 'notAuthorized'
   | 'authorized'
-  | 'blocked'
-  | 'suspended'
+  | 'sleepMode'
   | 'starting'
-  | 'pendingPassword'
+  | 'yellowCard'
+  | 'suspended'
 
 type GreenApiStateResponse = {
   stateInstance?: GreenApiInstanceState
@@ -44,10 +44,10 @@ function isInstanceState(value: string): value is GreenApiInstanceState {
   return [
     'notAuthorized',
     'authorized',
-    'blocked',
-    'suspended',
+    'sleepMode',
     'starting',
-    'pendingPassword',
+    'yellowCard',
+    'suspended',
   ].includes(value)
 }
 

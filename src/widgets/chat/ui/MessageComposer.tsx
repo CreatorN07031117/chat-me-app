@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import styles from './MessageComposer.module.css'
 
 const emojis = ['😀', '😂', '😌', '👍', '🎉', '❤️', '🔥', '🤔']
@@ -51,6 +51,13 @@ export function MessageComposer({ onSend, error }: MessageComposerProps) {
     }
   }
 
+  const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key !== 'Enter' || event.shiftKey || event.nativeEvent.isComposing) return
+
+    event.preventDefault()
+    void handleSend()
+  }
+
   const handleEmojiSelect = (emoji: string) => {
     setValue((currentValue) => `${currentValue}${emoji}`)
     textareaRef.current?.focus()
@@ -74,6 +81,7 @@ export function MessageComposer({ onSend, error }: MessageComposerProps) {
           aria-label="Текст сообщения"
           disabled={isSending}
           onChange={(event) => setValue(event.target.value)}
+          onKeyDown={handleKeyDown}
         />
 
         <button
