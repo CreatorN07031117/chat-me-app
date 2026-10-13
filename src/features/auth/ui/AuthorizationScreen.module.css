@@ -1,0 +1,200 @@
+.form {
+  display: grid;
+  gap: var(--spacing-xl);
+  width: 100%;
+}
+
+.themeSwitcher {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+.themeToggle {
+  position: relative;
+  justify-self: end;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--border-radius-common-4xl);
+  background: transparent;
+  color: var(--icon-themed);
+  cursor: pointer;
+}
+
+.themeToggle:focus-visible {
+  outline: 3px solid var(--background-themed-fade);
+  outline-offset: 2px;
+}
+
+.themeIcon {
+  position: absolute;
+  inset: 4px;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: scale(0.75) rotate(-12deg);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.themeIcon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.themeIconDark {
+  color: var(--icon-themed);
+}
+
+.themeIconLight {
+  color: var(--icon-attention);
+}
+
+.themeSwitcher[data-theme='dark'] .themeIconDark,
+.themeSwitcher[data-theme='light'] .themeIconLight,
+.themeToggle:hover .themeIconLight,
+.themeToggle:hover .themeIconDark {
+  opacity: 1;
+  transform: scale(1) rotate(0);
+}
+
+.themeSwitcher[data-theme='dark'] .themeToggle:hover .themeIconDark,
+.themeSwitcher[data-theme='light'] .themeToggle:hover .themeIconLight {
+  opacity: 0;
+  transform: scale(0.75) rotate(12deg);
+}
+
+.fields {
+  display: grid;
+  gap: var(--spacing-m);
+}
+
+.field {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  height: 56px;
+  padding: 19px var(--spacing-l) var(--spacing-xs);
+  border: 2px solid var(--background-tertiary);
+  border-radius: var(--border-radius-common-xl);
+  background: var(--background-secondary);
+  color: var(--text);
+  caret-color: var(--icon-themed);
+  font: inherit;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  outline: none;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.input::placeholder {
+  color: transparent;
+}
+
+.input:focus,
+.input:not(:placeholder-shown) {
+  border-color: var(--icon-themed);
+}
+
+.input:hover {
+  border-color: var(--icon-themed);
+  background: var(--background-primary);
+}
+
+.input:focus {
+  background: var(--background-primary);
+}
+
+.input:focus-visible {
+  box-shadow: 0 0 0 3px var(--background-themed-fade);
+}
+
+.label {
+  position: absolute;
+  top: 50%;
+  left: var(--spacing-l);
+  color: var(--text-secondary);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  pointer-events: none;
+  transform: translateY(-50%);
+  transform-origin: left center;
+  transition: top 160ms ease, transform 160ms ease, color 160ms ease, font-size 160ms ease;
+}
+
+.input:focus + .label,
+.input:not(:placeholder-shown) + .label {
+  top: 8px;
+  padding: 0 var(--spacing-xs);
+  margin-left: calc(var(--spacing-xs) * -1);
+  background: var(--background-primary);
+  color: var(--icon-themed);
+  font-size: var(--font-label-size);
+  line-height: var(--font-label-line-height);
+  transform: none;
+}
+
+.input:hover + .label {
+  color: var(--icon-themed);
+}
+
+.submit {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--spacing-m) var(--spacing-l);
+  border: 0;
+  border-radius: var(--border-radius-common-m);
+  background: var(--button-primary);
+  color: var(--button-primary-contrast);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--font-action-medium-size);
+  font-weight: var(--font-action-medium-weight);
+  line-height: var(--font-action-medium-line-height);
+  transition: filter 160ms ease, transform 160ms ease;
+}
+
+.submit:hover {
+  filter: brightness(1.08);
+}
+
+.submit:disabled {
+  cursor: not-allowed;
+  filter: none;
+  opacity: 0.5;
+}
+
+.submit:active {
+  transform: translateY(1px);
+}
+
+.submit:focus-visible {
+  outline: 3px solid var(--background-themed-fade);
+  outline-offset: 2px;
+}
+
+.error {
+  margin: calc(var(--spacing-m) * -1) 0 0;
+  color: var(--icon-negative);
+  font-size: var(--font-description-size);
+  line-height: var(--font-description-line-height);
+}
+
+@media (max-width: 640px) {
+  .input {
+    height: 52px;
+    padding: 18px var(--spacing-m) var(--spacing-2xs);
+    font-size: var(--font-detail-size);
+    line-height: var(--font-detail-line-height);
+  }
+
+  .label {
+    left: var(--spacing-m);
+    font-size: var(--font-detail-size);
+    line-height: var(--font-detail-line-height);
+  }
+}

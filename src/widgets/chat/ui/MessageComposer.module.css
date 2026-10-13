@@ -1,0 +1,143 @@
+.composer {
+  position: relative;
+  z-index: 2;
+  padding: var(--spacing-s) var(--spacing-xl) var(--spacing-xl);
+  background: var(--background-primary);
+}
+
+.error {
+  margin: 0 0 var(--spacing-s);
+  color: var(--icon-negative);
+  font-size: var(--font-description-size);
+  line-height: var(--font-description-line-height);
+}
+
+.editor {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-xs);
+  min-height: 48px;
+  padding: var(--spacing-xs);
+  border: 1px solid var(--background-tertiary);
+  border-radius: var(--border-radius-common-m);
+  background: var(--background-secondary);
+  box-shadow: 0 2px 10px #00000014;
+}
+
+.textarea {
+  min-width: 0;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 44px;
+  max-height: calc((var(--font-body-line-height) * 12) + (var(--spacing-s) * 2));
+  padding: var(--spacing-s) var(--spacing-xs);
+  border: 0;
+  outline: 0;
+  resize: none;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+}
+
+.textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+.emojiButton,
+.sendButton {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--border-radius-common-4xl);
+  background: transparent;
+  color: var(--icon-themed);
+  cursor: pointer;
+}
+
+.emojiButton:hover,
+.sendButton:hover:not(:disabled) {
+  background: var(--background-tertiary);
+}
+
+.emojiButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.emojiButton:focus-visible,
+.sendButton:focus-visible {
+  outline: 3px solid var(--background-themed-fade);
+  outline-offset: 1px;
+}
+
+.emojiButton svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.sendButton {
+  color: var(--button-primary);
+}
+
+.sendButton svg {
+  width: 25px;
+  height: 25px;
+  fill: currentColor;
+}
+
+.sendButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.emojiPicker {
+  position: absolute;
+  right: var(--spacing-s);
+  bottom: calc(100% + var(--spacing-xs));
+  display: grid;
+  grid-template-columns: repeat(4, 36px);
+  gap: var(--spacing-xs);
+  padding: var(--spacing-s);
+  border: 1px solid var(--bubbles-system-stroke-step-2);
+  border-radius: var(--border-radius-common-m);
+  background: var(--background-primary);
+  box-shadow: 0 4px 20px #00000024;
+}
+
+.emoji {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--border-radius-common-s);
+  background: transparent;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.emoji:hover {
+  background: var(--background-tertiary);
+}
+
+@media (max-width: 640px) {
+  .composer {
+    padding: var(--spacing-xs) var(--spacing-l) var(--spacing-l);
+  }
+
+  .textarea {
+    font-size: var(--font-detail-size);
+    line-height: var(--font-detail-line-height);
+  }
+}

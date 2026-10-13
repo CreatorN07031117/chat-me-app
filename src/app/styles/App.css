@@ -1,0 +1,64 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+.chat-background,
+.loading {
+  min-height: 100dvh;
+}
+
+.chat-background {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--background-surface);
+  background-image:
+    radial-gradient(circle at 12% 0%, var(--chat-background-background-step-2), transparent 48%),
+    linear-gradient(135deg, var(--chat-background-background-step-1), var(--chat-background-background-step-2));
+}
+
+.chat-background__pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.45;
+  background-color: var(--chat-background-pattern-color);
+  -webkit-mask-image: url('../../assets/pattern_space.svg');
+  mask-image: url('../../assets/pattern_space.svg');
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+  -webkit-mask-size: 280px 280px;
+  mask-size: 280px 280px;
+}
+
+.chat-background__content {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.loading {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: var(--text);
+  background: var(--background-surface);
+  font-size: var(--font-title-size);
+  line-height: var(--font-title-line-height);
+}
